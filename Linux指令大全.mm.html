@@ -1,0 +1,490 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Linux&#25351;&#20196;&#22823;&#20840;</title>
+<style type="text/css">
+    li { list-style: none;  margin: 0; }
+    p { margin: 0; }
+    span.foldopened { color: white; font-size: xx-small;
+    border-width: 1; font-family: monospace; padding: 0em 0.25em 0em 0.25em; background: #e0e0e0;
+    VISIBILITY: visible;
+    cursor:pointer; }
+
+
+    span.foldclosed { color: #666666; font-size: xx-small;
+    border-width: 1; font-family: monospace; padding: 0em 0.25em 0em 0.25em; background: #e0e0e0;
+    VISIBILITY: hidden;
+    cursor:pointer; }
+
+    span.foldspecial { color: #666666; font-size: xx-small; border-style: none solid solid none;
+    border-color: #CCCCCC; border-width: 1; font-family: sans-serif; padding: 0em 0.1em 0em 0.1em; background: #e0e0e0;
+    cursor:pointer; }
+
+    span.l { color: red; font-weight: bold; }
+
+    a.mapnode:link {text-decoration: none; color: black; }
+    a.mapnode:visited {text-decoration: none; color: black; }
+    a.mapnode:active {text-decoration: none; color: black; }
+    a.mapnode:hover {text-decoration: none; color: black; background: #eeeee0; }
+
+</style>
+<!-- ^ Position is not set to relative / absolute here because of Mozilla -->
+</head>
+<body>
+
+<script type="text/javascript">
+   // Here we implement folding. It works fine with MSIE5.5, MSIE6.0 and
+   // Mozilla 0.9.6.
+
+   if (document.layers) {
+      //Netscape 4 specific code
+      pre = 'document.';
+      post = ''; }
+   if (document.getElementById) {
+      //Netscape 6 specific code
+      pre = 'document.getElementById("';
+      post = '").style'; }
+   if (document.all) {
+      //IE4+ specific code
+      pre = 'document.all.';
+      post = '.style'; }
+
+function layer_exists(layer) {
+   try {
+      eval(pre + layer + post);
+      return true; }
+   catch (error) {
+      return false; }}
+
+function show_layer(layer) {
+   eval(pre + layer + post).position = 'relative'; 
+   eval(pre + layer + post).visibility = 'visible'; }
+
+function hide_layer(layer) {
+   eval(pre + layer + post).visibility = 'hidden';
+   eval(pre + layer + post).position = 'absolute'; }
+
+function hide_folder(folder) {
+    hide_folding_layer(folder)
+    show_layer('show'+folder);
+
+    scrollBy(0,0); // This is a work around to make it work in Browsers (Explorer, Mozilla)
+}
+
+function show_folder(folder) {
+    // Precondition: all subfolders are folded
+
+    show_layer('hide'+folder);
+    hide_layer('show'+folder);
+    show_layer('fold'+folder);
+
+    scrollBy(0,0); // This is a work around to make it work in Browsers (Explorer, Mozilla)
+
+    var i;
+    for (i=1; layer_exists('fold'+folder+'_'+i); ++i) {
+       show_layer('show'+folder+'_'+i); }
+}
+function show_folder_completely(folder) {
+    // Precondition: all subfolders are folded
+
+    show_layer('hide'+folder);
+    hide_layer('show'+folder);
+    show_layer('fold'+folder);
+
+    scrollBy(0,0); // This is a work around to make it work in Browsers (Explorer, Mozilla)
+
+    var i;
+    for (i=1; layer_exists('fold'+folder+'_'+i); ++i) {
+       show_folder_completely(folder+'_'+i); }
+}
+
+
+
+function hide_folding_layer(folder) {
+   var i;
+   for (i=1; layer_exists('fold'+folder+'_'+i); ++i) {
+       hide_folding_layer(folder+'_'+i); }
+
+   hide_layer('hide'+folder);
+   hide_layer('show'+folder);
+   hide_layer('fold'+folder);
+
+   scrollBy(0,0); // This is a work around to make it work in Browsers (Explorer, Mozilla)
+}
+
+function fold_document() {
+   var i;
+   var folder = '1';
+   for (i=1; layer_exists('fold'+folder+'_'+i); ++i) {
+       hide_folder(folder+'_'+i); }
+}
+
+function unfold_document() {
+   var i;
+   var folder = '1';
+   for (i=1; layer_exists('fold'+folder+'_'+i); ++i) {
+       show_folder_completely(folder+'_'+i); }
+}
+
+</script>
+<SPAN class="foldspecial" onclick="fold_document()">All +</SPAN>
+<SPAN class="foldspecial" onclick="unfold_document()">All -</SPAN>
+<p>Linux&#25351;&#20196;&#22823;&#20840;
+<ul><li><span id="show1_1" class="foldclosed" onClick="show_folder('1_1')" style="POSITION: absolute">+</span> <span id="hide1_1" class="foldopened" onClick="hide_folder('1_1')">-</span>
+<span style="font-family: SansSerif, sans-serif; ">hwclock&#65306;&#26174;&#31034;&#30828;&#20214;&#26102;&#38047;</span>
+<ul id="fold1_1" style="POSITION: relative; VISIBILITY: visible;"><li>-w&#20197;&#31995;&#32479;&#26102;&#38047;&#35843;&#25972;&#30828;&#20214;&#26102;&#38047;
+
+</li>
+<li>-s&#20197;&#30828;&#20214;&#26102;&#38047;&#35843;&#25972;&#31995;&#32479;&#26102;&#38047;
+
+</li>
+
+</ul>
+</li>
+<li>nano&#65306;&#20351;&#29992;nano&#25991;&#26412;&#32534;&#36753;&#22120;
+
+</li>
+<li>poweroff&#65306;&#20851;&#26426;
+
+</li>
+<li><span id="show1_2" class="foldclosed" onClick="show_folder('1_2')" style="POSITION: absolute">+</span> <span id="hide1_2" class="foldopened" onClick="hide_folder('1_2')">-</span>
+shutdown&#65306;&#20851;&#26426;&#25110;&#37325;&#21551;
+<ul id="fold1_2" style="POSITION: relative; VISIBILITY: visible;"><li>-r reboot
+
+</li>
+<li>-h halt
+
+</li>
+<li>-c cancel
+
+</li>
+<li>TIME:[&#26102;&#38388;]&#65306;&#25351;&#26126;&#21160;&#20316;&#26102;&#38388;
+<ul><li>now&#65306;&#31435;&#21051;
+
+</li>
+<li>+m&#65306;&#30456;&#23545;&#26102;&#38388;&#20043;&#21518;
+
+</li>
+<li>hh:mm&#20855;&#20307;&#26102;&#38388;
+
+</li>
+
+</ul>
+</li>
+
+</ul>
+</li>
+<li>who&#65306;&#31995;&#32479;&#24403;&#21069;&#25152;&#26377;&#30331;&#24405;&#20250;&#35805;
+
+</li>
+<li><span id="show1_3" class="foldclosed" onClick="show_folder('1_3')" style="POSITION: absolute">+</span> <span id="hide1_3" class="foldopened" onClick="hide_folder('1_3')">-</span>
+screen&#65306;&#20250;&#35805;&#25351;&#20196;
+<ul id="fold1_3" style="POSITION: relative; VISIBILITY: visible;"><li>-S [&#20250;&#35805;]&#21019;&#24314;&#26032;&#20250;&#35805;
+
+</li>
+<li>-x [&#20250;&#35805;] &#21152;&#20837;&#25351;&#23450;&#20250;&#35805;
+
+</li>
+<li>-d[&#20250;&#35805;] &#31163;&#32447;&#25351;&#23450;&#20250;&#35805;
+
+</li>
+<li>-r [&#20250;&#35805;] &#24674;&#22797;&#25351;&#23450;&#20250;&#35805;
+
+</li>
+<li>exit &#22312;&#20250;&#35805;&#20013;&#36864;&#20986;
+
+</li>
+<li>Ctrl+a&#65292;d &#20808;&#25353;Ctrl+a&#20877;&#25353;d&#21093;&#31163;&#20250;&#35805;
+
+</li>
+<li>-ls &#26174;&#31034;&#25152;&#26377;&#24050;&#25171;&#24320;&#20250;&#35805;
+
+</li>
+
+</ul>
+</li>
+<li><span id="show1_4" class="foldclosed" onClick="show_folder('1_4')" style="POSITION: absolute">+</span> <span id="hide1_4" class="foldopened" onClick="hide_folder('1_4')">-</span>
+history&#65306;&#21382;&#21490;&#21629;&#20196;
+<ul id="fold1_4" style="POSITION: relative; VISIBILITY: visible;"><li>HISTSIZE&#65306; &#21629;&#20196;&#21382;&#21490;&#35760;&#24405;&#30340;&#26465;&#25968;
+
+</li>
+<li>HISTFILE&#65306; &#25351;&#23450;&#21382;&#21490;&#25991;&#20214;&#65292;&nbsp;&#40664;&#35748;&#20026;~/.bash_history
+
+</li>
+<li> HISTFILESIZE&#65306; &#21629;&#20196;&#21382;&#21490;&#25991;&#20214;&#35760;&#24405;&#21382;&#21490;&#30340;&#26465;&#25968;
+
+</li>
+<li>HISTTIMEFORMAT=&#8220;%F %T &#8220;&nbsp;&#26174;&#31034;&#26102;&#38388;
+
+</li>
+<li>HISTIGNORE=&#8220;str1:str2:&#8230; &#8220;&nbsp;&#24573;&#30053;string1,string2&#21382;&#21490;
+
+</li>
+<li>HISTCONTROL&#65306;&#25511;&#21046;&#21629;&#20196;&#21382;&#21490;&#30340;&#35760;&#24405;&#26041;&#24335;
+<ul><li>ignoredups &#40664;&#35748;&#65292;&nbsp;&#24573;&#30053;&#37325;&#22797;&#30340;&#21629;&#20196;&#65292;&nbsp;&#36830;&#32493;&#19988;&#30456;&#21516;&#20026;&#8220;&nbsp;&#37325;&#22797;&#8221;
+
+</li>
+<li>ignorespace &#24573;&#30053;&#25152;&#26377;&#20197;&#31354;&#30333;&#24320;&#22836;&#30340;&#21629;&#20196;
+
+</li>
+<li>ignoreboth &#30456;&#24403;&#20110;ignoredups, ignorespace&#30340;&#32452;&#21512;
+
+</li>
+<li>erasedups &#21024;&#38500;&#37325;&#22797;&#21629;&#20196;
+
+</li>
+
+</ul>
+</li>
+
+</ul>
+</li>
+<li><span id="show1_5" class="foldclosed" onClick="show_folder('1_5')" style="POSITION: absolute">+</span> <span id="hide1_5" class="foldopened" onClick="hide_folder('1_5')">-</span>
+ls&#65306;&#21015;&#20986;&#25991;&#20214;&#25110;&#30446;&#24405;&#21015;&#34920;
+<ul id="fold1_5" style="POSITION: relative; VISIBILITY: visible;"><li>ls /dir/&#25991;&#20214;&#36890;&#37197;&#31526;
+
+</li>
+
+</ul>
+</li>
+<li><span id="show1_6" class="foldclosed" onClick="show_folder('1_6')" style="POSITION: absolute">+</span> <span id="hide1_6" class="foldopened" onClick="hide_folder('1_6')">-</span>
+cp&#65306;&#22797;&#21046;&#25991;&#20214;&#21644;&#30446;&#24405;
+<ul id="fold1_6" style="POSITION: relative; VISIBILITY: visible;"><li><span id="show1_6_1" class="foldclosed" onClick="show_folder('1_6_1')" style="POSITION: absolute">+</span> <span id="hide1_6_1" class="foldopened" onClick="hide_folder('1_6_1')">-</span>
+&#27880;&#24847;&#20107;&#39033;
+<ul id="fold1_6_1" style="POSITION: relative; VISIBILITY: visible;"><li>cp &#22810;&#20010;&#25991;&#20214;&nbsp;&#25351;&#23450;&#30446;&#24405;&#65306;&#25351;&#23450;&#30446;&#24405;&#24517;&#39035;&#23384;&#22312;
+
+</li>
+<li>cp -r &#28304;&#30446;&#24405;&nbsp;&#25351;&#23450;&#30446;&#24405;&#65306;&#22797;&#21046;&#28304;&#30446;&#24405;&#25152;&#26377;&#25991;&#20214;&#21040;&#25351;&#23450;&#25991;&#20214;&#12290;&#25351;&#23450;&#30446;&#24405;&#19981;&#23384;&#22312;&#21019;&#24314;&#30446;&#24405;&#65292;&#25351;&#23450;&#30446;&#24405;&#20026;&#25991;&#20214;&#25253;&#38169;
+
+</li>
+<li>cp &#28304;&#25991;&#20214;&nbsp;&#30446;&#26631;&#25991;&#20214;&#65306;&#22797;&#21046;&#25991;&#20214;&#21040;&#30446;&#26631;&#25991;&#20214;&#12290;&#20250;&#35206;&#30422;&#30446;&#26631;&#25991;&#20214;&#65292;&#29992;-i&#20250;&#25552;&#31034;&#20002;&#22833;&#39118;&#38505;
+
+</li>
+
+</ul>
+</li>
+<li>-i&#65306;&#35206;&#30422;&#21069;&#25552;&#31034;
+
+</li>
+<li>-n&#65306;&#19981;&#35206;&#30422;
+
+</li>
+<li>-r -R&#65306;&#36882;&#24402;&#22797;&#21046;
+
+</li>
+<li>-a&#65306;&#20445;&#30041;&#21407;&#26469;&#25991;&#20214;&#30340;&#20803;&#25968;&#25454;
+
+</li>
+<li>-d&#65306;&#19981;&#22797;&#21046;&#21407;&#26469;&#25991;&#20214;&#21482;&#22797;&#21046;&#38142;&#25509;&#21517;
+
+</li>
+<li>-v &#65306;&#35814;&#24773;
+
+</li>
+<li>-f&#65306;&#24378;&#21046;&#22797;&#21046;
+
+</li>
+
+</ul>
+</li>
+<li><span id="show1_7" class="foldclosed" onClick="show_folder('1_7')" style="POSITION: absolute">+</span> <span id="hide1_7" class="foldopened" onClick="hide_folder('1_7')">-</span>
+rm&#65306;&#21024;&#38500;&#25991;&#20214;
+<ul id="fold1_7" style="POSITION: relative; VISIBILITY: visible;"><li>-i&#65306;&#20132;&#20114;
+
+</li>
+<li>-f&#65306;&#24378;&#21046;&#21024;&#38500;
+
+</li>
+<li>-r&#65306;&#36882;&#24402;&#21024;&#38500;
+
+</li>
+
+</ul>
+</li>
+<li><span id="show1_8" class="foldclosed" onClick="show_folder('1_8')" style="POSITION: absolute">+</span> <span id="hide1_8" class="foldopened" onClick="hide_folder('1_8')">-</span>
+mkdir&#65306;&#21019;&#24314;&#30446;&#24405;
+<ul id="fold1_8" style="POSITION: relative; VISIBILITY: visible;"><li>-p&#65306;&#19981;&#25253;&#38169;&#33258;&#21160;&#21019;&#24314;&#21508;&#20010;&#30446;&#24405;
+
+</li>
+<li>-v&#65306;&#26174;&#31034;&#35814;&#32454;&#20449;&#24687;
+
+</li>
+<li>-m MODE &#21019;&#24314;&#30446;&#24405;&#30452;&#25509;&#25351;&#23450;&#26435;&#38480;
+
+</li>
+
+</ul>
+</li>
+<li><span id="show1_9" class="foldclosed" onClick="show_folder('1_9')" style="POSITION: absolute">+</span> <span id="hide1_9" class="foldopened" onClick="hide_folder('1_9')">-</span>
+file&#65306;&#26597;&#30475;&#25991;&#20214;&#31867;&#22411;
+<ul id="fold1_9" style="POSITION: relative; VISIBILITY: visible;"><li>-b&#65306;&#19981;&#26174;&#31034;&#25991;&#20214;&#21517;
+
+</li>
+<li>-f&#65306;&#21015;&#20986;&#25991;&#20214;&#20013;&#30340;&#25991;&#20214;&#21517;&#30340;&#25991;&#20214;&#28872;&#24615;
+
+</li>
+<li>-L&#65306;&#26597;&#30475;&#36719;&#38142;&#25509;&#23545;&#24212;&#30340;&#25991;&#20214;&#31867;&#22411;
+
+</li>
+
+</ul>
+</li>
+<li><span id="show1_10" class="foldclosed" onClick="show_folder('1_10')" style="POSITION: absolute">+</span> <span id="hide1_10" class="foldopened" onClick="hide_folder('1_10')">-</span>
+data&#65306;&#26174;&#31034;&#26085;&#26399;&#21644;&#26102;&#38388;
+<ul id="fold1_10" style="POSITION: relative; VISIBILITY: visible;"><li><span id="show1_10_1" class="foldclosed" onClick="show_folder('1_10_1')" style="POSITION: absolute">+</span> <span id="hide1_10_1" class="foldopened" onClick="hide_folder('1_10_1')">-</span>
++&#26684;&#24335;&#65306;&#25351;&#23450;&#26684;&#24335;&#36755;&#20986;
+<ul id="fold1_10_1" style="POSITION: relative; VISIBILITY: visible;"><li>%Y &#22235;&#20301;&#24180;
+
+</li>
+<li>%y &#20004;&#20301;&#24180;
+
+</li>
+<li>%m &#26376;
+
+</li>
+<li>%d &#26085;
+
+</li>
+<li>%H &#23567;&#26102;
+
+</li>
+<li>%M &#20998;&#38047;
+
+</li>
+<li>%S &#31186;
+
+</li>
+
+</ul>
+</li>
+<li>--date=&#8220;&#33258;&#23450;&#20041;&#26102;&#38388;&#8221;
+
+</li>
+
+</ul>
+</li>
+<li><span id="show1_11" class="foldclosed" onClick="show_folder('1_11')" style="POSITION: absolute">+</span> <span id="hide1_11" class="foldopened" onClick="hide_folder('1_11')">-</span>
+cal&#65306;&#26174;&#31034;&#26376;&#21382;
+<ul id="fold1_11" style="POSITION: relative; VISIBILITY: visible;"><li>-y &#26174;&#31034;&#24180;&#21382;
+
+</li>
+
+</ul>
+</li>
+<li>halt&#65306;&#20851;&#26426;
+
+</li>
+<li><span id="show1_12" class="foldclosed" onClick="show_folder('1_12')" style="POSITION: absolute">+</span> <span id="hide1_12" class="foldopened" onClick="hide_folder('1_12')">-</span>
+reboot&#65306;&#37325;&#21551;
+<ul id="fold1_12" style="POSITION: relative; VISIBILITY: visible;"><li>-f &#24378;&#21046;&#37325;&#21551;
+
+</li>
+<li>-p &#20999;&#26029;&#30005;&#28304;
+
+</li>
+
+</ul>
+</li>
+<li>whoami&#65306;&#26174;&#31034;&#24403;&#21069;&#30331;&#24405;&#26377;&#25928;&#29992;&#25143;
+
+</li>
+<li>w&#65306;&#31995;&#32479;&#24403;&#21069;&#25152;&#26377;&#30331;&#24405;&#20250;&#35805;&#21450;&#25152;&#20570;&#25805;&#20316;
+
+</li>
+<li><span id="show1_13" class="foldclosed" onClick="show_folder('1_13')" style="POSITION: absolute">+</span> <span id="hide1_13" class="foldopened" onClick="hide_folder('1_13')">-</span>
+echo&#65306;&#26631;&#20934;&#36755;&#20986;&#24182;&#25442;&#34892;
+<ul id="fold1_13" style="POSITION: relative; VISIBILITY: visible;"><li>-E &#40664;&#35748;&#21151;&#33021;
+
+</li>
+<li>-n &#19981;&#33258;&#21160;&#25442;&#34892;
+
+</li>
+<li><span id="show1_13_1" class="foldclosed" onClick="show_folder('1_13_1')" style="POSITION: absolute">+</span> <span id="hide1_13_1" class="foldopened" onClick="hide_folder('1_13_1')">-</span>
+-e &#21551;&#21160;&#29305;&#27530;&#21151;&#33021;
+<ul id="fold1_13_1" style="POSITION: relative; VISIBILITY: visible;"><li>\a &#21457;&#20986;&#35686;&#21578;&#22768;
+
+</li>
+<li>\b &#36864;&#26684;
+
+</li>
+<li>\c &#19981;&#25442;&#34892;
+
+</li>
+<li>\n &#25442;&#34892;&#65292;&#20809;&#26631;&#33267;&#34892;&#39318;
+
+</li>
+<li>\r &#19981;&#25442;&#34892;&#65292;&#20809;&#26631;&#33267;&#34892;&#39318;
+
+</li>
+<li>\t &#25554;&#20837;tab
+
+</li>
+<li>\\ &#25554;&#20837;\
+
+</li>
+<li>\0&#25968;&#23383; &#25554;&#20837;&#20843;&#36827;&#21046;&#25968;&#23383;
+
+</li>
+<li>\x&#25968;&#23383; &#25554;&#20837;&#21313;&#20845;&#36827;&#21046;&#25968;&#23383;
+
+</li>
+
+</ul>
+</li>
+
+</ul>
+</li>
+<li>man&#65306;&#26597;&#30475;&#25351;&#20196;&#24110;&#21161;&#25991;&#26723;
+
+</li>
+<li><span id="show1_14" class="foldclosed" onClick="show_folder('1_14')" style="POSITION: absolute">+</span> <span id="hide1_14" class="foldopened" onClick="hide_folder('1_14')">-</span>
+touch&#65306;&#21047;&#26032;&#25991;&#20214;
+<ul id="fold1_14" style="POSITION: relative; VISIBILITY: visible;"><li>-a&#65306;&#20165;&#25913;&#21464;atime&#21644;ctime
+
+</li>
+<li>-m&#65306;&#20165;&#25913;&#21464;mtime&#21644;ctime
+
+</li>
+<li>-t&#65306;&#25351;&#23450;atime&#21644;mtime&#30340;&#26102;&#38388;&#25139;
+
+</li>
+<li>-c&#65306;&#22914;&#26524;&#25991;&#20214;&#19981;&#23384;&#22312;&#65292;&#21017;&#19981;&#21019;&#24314;&#25991;&#20214;
+
+</li>
+
+</ul>
+</li>
+<li>mv&#65306;&#31227;&#21160;&#25110;&#37325;&#21629;&#21517;&#25991;&#20214;&#65288;&#29992;&#27861;&#22522;&#26412;&#19982;cp&#30456;&#21516;&#65289;
+
+</li>
+<li><span id="show1_15" class="foldclosed" onClick="show_folder('1_15')" style="POSITION: absolute">+</span> <span id="hide1_15" class="foldopened" onClick="hide_folder('1_15')">-</span>
+tree&#65306;&#26174;&#31034;&#30446;&#24405;&#26641;
+<ul id="fold1_15" style="POSITION: relative; VISIBILITY: visible;"><li>-d&#65306;&#21482;&#26174;&#31034;&#30446;&#24405;
+
+</li>
+<li>-L &#25968;&#23383;&#65306;&#25351;&#23450;&#26174;&#31034;&#23618;&#25968;
+
+</li>
+<li>-P &#34920;&#36798;&#24335;&#65306;&#21482;&#26174;&#31034;&#21305;&#37197;&#34920;&#36798;&#24335;&#30340;&#36335;&#24452;
+
+</li>
+
+</ul>
+</li>
+<li><span id="show1_16" class="foldclosed" onClick="show_folder('1_16')" style="POSITION: absolute">+</span> <span id="hide1_16" class="foldopened" onClick="hide_folder('1_16')">-</span>
+rmdir&#65306;&#21024;&#38500;&#31354;&#30446;&#24405;
+<ul id="fold1_16" style="POSITION: relative; VISIBILITY: visible;"><li>-p&#65306;&#36882;&#24402;&#21024;&#38500;&#29238;&#30446;&#24405;
+
+</li>
+<li>-v&#65306;&#26174;&#31034;&#35814;&#24773;
+
+</li>
+
+</ul>
+</li>
+
+</ul><SCRIPT type="text/javascript">
+fold_document();
+</SCRIPT>
+</body>
+</html>
